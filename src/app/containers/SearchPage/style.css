@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+}
+
+.header {
+	align-self: center;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+
+.textarea {
+	font-size: 20px;
+	height: 24px;
+  max-width: 1024px;
+  max-height: 90%;
+}
+
+.button {
+	margin-top: 20px;
+	font-size: 24px;
+}
