@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
-import mainReducer, { initialState } from '../reducers/main'
+import reducer, { initialState } from './reducer'
 
-export default createStore(mainReducer, initialState, applyMiddleware(thunk, logger))
+export default createStore(reducer, initialState, applyMiddleware(thunk, logger))
 

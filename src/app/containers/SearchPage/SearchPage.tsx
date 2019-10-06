@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { fetchData } from '../../actions/actions'
+import { fetchData } from '../../store/actions'
+import { AppStore } from '../../utils/types'
+import { History } from 'history';
 
 import './style.css'
 
 interface Props {
-  fetchData: Function
+  loading: boolean,
+  fetchData: Function,
+  history: History,
 }
 
 const SearchPage = (props: Props) => {
   const [value, setRequest] = useState('')
+
   const handleValue = (event: any) => setRequest(event.target.value)
   const handleClick = () => props.fetchData(value)
 
@@ -22,8 +27,8 @@ const SearchPage = (props: Props) => {
   )
 }
 
-
-
-export default connect(null, {
-  fetchData: (request: string) => fetchData(request)
+export default connect((state: AppStore) => ({
+  loading: state.loading
+}), {
+  fetchData
 })(SearchPage)

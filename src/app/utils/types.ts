@@ -3,12 +3,12 @@ export interface Data {
 }
 
 export interface AppStore {
-	data: Data | null;
+	data: [] | null;
 	loading: boolean;
 }
 
 export interface Action {
-	type: any;
+	type: string;
 }
 
 export interface AnyAction extends Action {

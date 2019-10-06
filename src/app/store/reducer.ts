@@ -1,12 +1,12 @@
-import * as actionTypes from '../actions/actionTypes'
-import { AppStore, AnyAction } from '../types/types'
+import * as actionTypes from './actionTypes'
+import { AppStore, AnyAction } from '../utils/types'
 
 export const initialState: AppStore = {
   data: null,
   loading: false
 }
 
-const mainReducer = (state = initialState, action: AnyAction) => {
+const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case actionTypes.FETCH_REQUEST_START:
       return {
@@ -30,4 +30,4 @@ const mainReducer = (state = initialState, action: AnyAction) => {
   }
 }
 
-export default mainReducer
+export default reducer

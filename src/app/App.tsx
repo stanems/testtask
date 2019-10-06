@@ -1,15 +1,32 @@
-import React from 'react';
-import MainPage from './containers/MainPage';
-import { Provider } from 'react-redux'
-import './App.css';
-import store from './store';
+import React from 'react'
+import { Router, Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { AppStore } from './utils/types';
+import SearchPage from './containers/SearchPage';
+import ResultsPage from './containers/ResultsPage';
+import Loader from './components/Loader';
+import { ROUTES } from './utils/routes';
+import history from './utils/history'
 
-const App: React.FC = () => (
-  <div className="App">
-    <Provider store={store}>
-      <MainPage />
-    </Provider>
-  </div>
-);
+import './App.css'
 
-export default App;
+interface Props {
+	loading: boolean
+}
+
+const App = (props: Props) => (
+	<main className='App'>
+		{props.loading && <Loader />}
+		<Router history={history}>
+			<Switch>
+				<Route exact path={ROUTES.SEARCH} component={SearchPage} />
+				<Route path={ROUTES.RESULTS} component={ResultsPage} />
+			</Switch>
+		</Router>
+	</main>
+)
+
+export default connect((state: AppStore) => ({
+	loading: state.loading
+}))(App)
+
