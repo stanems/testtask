@@ -26,6 +26,10 @@ export interface AppStore {
 	data: Data[] | null;
 	addData: Data[] | null;
 	loading: boolean;
+	selectedPost: {
+		question: Data | null;
+		answers: any;
+	}
 }
 
 export interface Action {

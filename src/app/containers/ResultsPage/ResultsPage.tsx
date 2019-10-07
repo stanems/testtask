@@ -22,8 +22,8 @@ const ResultsPage = (props: Props) => {
       {data && <ResultsTable data={data} />}
       <div className='results__preview'>
         <Switch>
-          <Route path={ROUTES.AUTHOR_RESULTS} component={AddResultTable}/>
-          <Route path={ROUTES.TAG_RESULTS} component={AddResultTable}/>
+          <Route path={ROUTES.AUTHOR_RESULTS} component={AddResultTable} />
+          <Route path={ROUTES.TAG_RESULTS} component={AddResultTable} />
         </Switch>
       </div>
     </div>
