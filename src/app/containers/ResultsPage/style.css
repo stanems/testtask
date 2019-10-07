@@ -1,0 +1,10 @@
+.results__container {
+  display: flex;
+  min-width: 1024px;
+  max-width: 1180px;
+  min-height: 100vh;
+}
+
+.results__preview {
+  min-width: 60%;
+}

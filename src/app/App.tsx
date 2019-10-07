@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { AppStore } from './utils/types';
 import SearchPage from './containers/SearchPage';
@@ -19,6 +19,9 @@ const App = (props: Props) => (
 		{props.loading && <Loader />}
 		<Router history={history}>
 			<Switch>
+				<Route exact path={ROUTES.HOME} >
+					<Redirect to={ROUTES.SEARCH} />
+				</Route> />
 				<Route exact path={ROUTES.SEARCH} component={SearchPage} />
 				<Route path={ROUTES.RESULTS} component={ResultsPage} />
 			</Switch>

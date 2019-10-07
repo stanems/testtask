@@ -1,7 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 1024px;
+  min-width: 1024px;
+  max-width: 1180px;
 }
 
 .header {
@@ -12,12 +13,14 @@
 
 .textarea {
 	font-size: 20px;
-	height: 24px;
+  height: 24px;
   max-width: 1024px;
   max-height: 90%;
 }
 
 .button {
+  align-self: center;
 	margin-top: 20px;
-	font-size: 24px;
+  font-size: 24px;
+  width: 50%;
 }
