@@ -1,9 +1,21 @@
 import * as actionTypes from './actionTypes'
-import { AppStore, AnyAction } from '../utils/types'
+import { AppStore, AnyAction, TableTypes, SortVariation, OrderVariation } from '../utils/types'
 
 export const initialState: AppStore = {
-  data: [],
-  addData: [],
+  requestParams: {
+    initialRequest: '',
+    sortBy: SortVariation.VOTES,
+    orderBy: OrderVariation.DESC,
+    addTableParam: null,
+  },
+  mainResult: {
+    data: [],
+    type: TableTypes.MAIN
+  },
+  addResult: {
+    data: [],
+    type: TableTypes.ADD,
+  },
   loading: false,
   selectedPost: {
     question: null,
@@ -13,6 +25,15 @@ export const initialState: AppStore = {
 
 const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
+    case actionTypes.SET_INITIAL_REQUEST:
+      return {
+        ...state,
+        requestParams: {
+          ...state.requestParams,
+          initialRequest: action.payload
+        }
+      }
+
     case actionTypes.FETCH_DATA_START:
     case actionTypes.FETCH_ADD_DATA_START:
     case actionTypes.FETCH_POST_START:
@@ -24,14 +45,50 @@ const reducer = (state = initialState, action: AnyAction) => {
     case actionTypes.FETCH_DATA_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        mainResult: {
+          ...state.mainResult,
+          data: action.payload,
+        },
         loading: false
       }
+
+    case actionTypes.SET_SEARCH_PARAM: {
+      return {
+        ...state,
+        requestParams: {
+          ...state.requestParams,
+          addTableParam: action.payload
+        }
+      }
+    }
+
+    case actionTypes.SET_SORT_BY_PARAM: {
+      return {
+        ...state,
+        requestParams: {
+          ...state.requestParams,
+          sortBy: action.payload
+        }
+      }
+    }
+
+    case actionTypes.SET_ORDER_BY_PARAM: {
+      return {
+        ...state,
+        requestParams: {
+          ...state.requestParams,
+          orderBy: action.payload
+        }
+      }
+    }
 
     case actionTypes.FETCH_ADD_DATA_SUCCESS:
       return {
         ...state,
-        addData: action.payload,
+        addResult: {
+          ...state.addResult,
+          data: action.payload,
+        },
         loading: false
       }
 

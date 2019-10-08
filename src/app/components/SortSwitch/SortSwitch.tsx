@@ -1,29 +1,65 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { SortVariation, OrderVariation, AppStore, RequestParams, TableTypes } from '../../utils/types'
+import { setSortBy, setOrderBy, fetchData, fetchAddData } from '../../store/actions'
 
 import './style.css'
-import { SortVariation, OrderVariation } from '../../utils/types'
 
-const SortSwitch = () => {
+interface Props {
+  fromTable: string;
+  requestParams: RequestParams;
+  setSortBy: Function;
+  setOrderBy: Function;
+  fetchData: Function;
+  fetchAddData: Function;
+}
+
+const SortSwitch = (props: Props) => {
+  const { requestParams, setSortBy, setOrderBy, fetchData, fetchAddData, fromTable } = props
+  const { sortBy, orderBy, initialRequest, addTableParam } = requestParams
+
+  const handleSortBy = (e: any) => {
+    setSortBy(e.target.value)
+    if (fromTable === TableTypes.MAIN) {
+      fetchData(initialRequest)
+    }
+    addTableParam && fetchAddData(addTableParam.value, addTableParam.type)
+  }
+
+  const handleOrderBy = (e: any) => {
+    setOrderBy(e.target.value)
+    if (fromTable === TableTypes.MAIN) {
+      fetchData(initialRequest)
+    }
+    addTableParam && fetchAddData(addTableParam.value, addTableParam.type)
+  }
 
   return (
-    <div className='switcher__container'>
+    <form className='switcher__container'>
       <div className='switcher__variantContainer'>
         <p className='switcher__title'>Sort by: </p>
-        <select className='switcher__select'>
+        <select className='switcher__select' value={sortBy} onChange={handleSortBy}>
           <option value={SortVariation.ACTIVITY}>{SortVariation.ACTIVITY}</option>
           <option value={SortVariation.CREATION}>{SortVariation.CREATION}</option>
-          <option selected value={SortVariation.VOTES}>{SortVariation.VOTES}</option>
+          <option value={SortVariation.VOTES}>{SortVariation.VOTES}</option>
         </select>
       </div>
       <div className='switcher__variantContainer'>
         <p className='switcher__title'>Order by: </p>
-        <select className='switcher__select'>
-          <option selected value={OrderVariation.DESC}>{OrderVariation.DESC}</option>
+        <select className='switcher__select' value={orderBy} onChange={handleOrderBy}>
+          <option value={OrderVariation.DESC}>{OrderVariation.DESC}</option>
           <option value={OrderVariation.ASC}>{OrderVariation.ASC}</option>
         </select>
       </div>
-    </div>
+    </form>
   )
 }
 
-export default SortSwitch
+export default connect((state: AppStore) => ({
+  requestParams: state.requestParams
+}), {
+  setSortBy,
+  setOrderBy,
+  fetchData,
+  fetchAddData
+})(SortSwitch)

@@ -4,14 +4,18 @@ import { fetchData } from '../../store/actions'
 import { History } from 'history';
 
 import './style.css'
+import { AppStore } from '../../utils/types';
 
 interface Props {
+  initialRequest: string;
   fetchData: Function,
   history: History,
 }
 
 const SearchPage = (props: Props) => {
-  const [value, setRequest] = useState('')
+  const { initialRequest } = props
+
+  const [value, setRequest] = useState(initialRequest)
 
   const handleValue = (event: any) => setRequest(event.target.value)
   const handleClick = () => props.fetchData(value)
@@ -25,6 +29,8 @@ const SearchPage = (props: Props) => {
   )
 }
 
-export default connect(null, {
+export default connect((state: AppStore) => ({
+  initialRequest: state.requestParams.initialRequest
+}), {
   fetchData
 })(SearchPage)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AppStore, Question } from '../../utils/types'
+import { AppStore, Question, TableTypes } from '../../utils/types'
 import ResultsTable from '../../components/ResultsTable'
 import { Switch, Route } from 'react-router'
 import { ROUTES } from '../../utils/routes'
@@ -15,11 +15,11 @@ interface Props {
 const ResultsPage = (props: Props) => {
   const { data, addData } = props
 
-  const AddResultTable = () => addData && <ResultsTable data={addData} />
+  const AddResultTable = () => addData && <ResultsTable data={addData} type={TableTypes.ADD} />
 
   return (
     <div className='results__container'>
-      {data && <ResultsTable data={data} />}
+      {data && <ResultsTable data={data} type={TableTypes.MAIN} />}
       <div className='results__preview'>
         <Switch>
           <Route path={ROUTES.AUTHOR_RESULTS} component={AddResultTable} />
@@ -31,6 +31,6 @@ const ResultsPage = (props: Props) => {
 }
 
 export default connect((state: AppStore) => ({
-  data: state.data,
-  addData: state.addData
+  data: state.mainResult.data,
+  addData: state.addResult.data
 }))(ResultsPage)

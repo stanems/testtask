@@ -40,9 +40,28 @@ export interface Post {
   answers: Answer[] | [],
 }
 
+export interface AddRequestParam {
+  type: string;
+  value: string | number;
+}
+
+export interface RequestParams {
+  initialRequest: string;
+  sortBy: string;
+  orderBy: string;
+  addTableParam: AddRequestParam | null;
+}
+
 export interface AppStore {
-  data: Question[] | [];
-  addData: Question[] | [];
+  requestParams: RequestParams,
+  mainResult: {
+    data: Question[] | [];
+    type: string;
+  },
+  addResult: {
+    data: Question[] | [];
+    type: string;
+  },
   loading: boolean;
   selectedPost: Post
 }
@@ -54,6 +73,14 @@ export interface Action {
 export interface AnyAction extends Action {
   // Allows any extra properties to be defined in an action.
   [extraProps: string]: any;
+}
+
+export interface SearchParams {
+  sortBy: string,
+  orderBy: string,
+  fromTable: string,
+  initialRequest: string,
+  searchParam: AddRequestParam
 }
 
 export const AddDataTypes = {
@@ -70,4 +97,9 @@ export const SortVariation = {
 export const OrderVariation = {
   DESC: 'desc',
   ASC: 'asc'
+}
+
+export const TableTypes = {
+  MAIN: 'main',
+  ADD: 'add',
 }

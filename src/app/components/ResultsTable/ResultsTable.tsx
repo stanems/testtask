@@ -6,15 +6,16 @@ import ResultItem from '../ResultItem'
 import SortSwitch from '../SortSwitch'
 
 interface Props {
-  data: Question[]
+  data: Question[];
+  type: string
 }
 
 const ResultsTable = (props: Props) => {
-  const { data } = props
+  const { data, type } = props
 
   return (
     <div className='resultsTable__container'>
-      <SortSwitch />
+      <SortSwitch fromTable={type} />
       {data && data.map(item => <ResultItem item={item} />)}
     </div>
   )
