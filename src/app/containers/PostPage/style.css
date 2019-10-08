@@ -1,0 +1,9 @@
+.post__container {
+  display: flex;
+  height: 100%;
+  min-width: 1024px;
+  max-width: 1180px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 16px;
+}

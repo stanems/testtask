@@ -2,12 +2,12 @@ import * as actionTypes from './actionTypes'
 import { AppStore, AnyAction } from '../utils/types'
 
 export const initialState: AppStore = {
-  data: null,
-  addData: null,
+  data: [],
+  addData: [],
   loading: false,
   selectedPost: {
     question: null,
-    answers: null,
+    answers: [],
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AppStore, Data } from '../../utils/types'
+import { AppStore, Question } from '../../utils/types'
 import ResultsTable from '../../components/ResultsTable'
 import { Switch, Route } from 'react-router'
 import { ROUTES } from '../../utils/routes'
@@ -8,8 +8,8 @@ import { ROUTES } from '../../utils/routes'
 import './style.css'
 
 interface Props {
-  data: Data[] | null;
-  addData: Data[] | null;
+  data: Question[] | null;
+  addData: Question[] | null;
 }
 
 const ResultsPage = (props: Props) => {

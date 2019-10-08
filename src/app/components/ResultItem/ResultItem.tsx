@@ -1,29 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Data, AddDataTypes } from '../../utils/types'
+import { Question, AddDataTypes } from '../../utils/types'
 import { Link } from 'react-router-dom'
-import { fetchAddData, selectPost, fetchPost } from '../../store/actions'
+import { fetchAddData, fetchPost } from '../../store/actions'
 import { ROUTES } from '../../utils/routes'
 
 import './style.css'
 
 interface Props {
-  item: Data;
+  item: Question;
   fetchAddData: Function;
-  selectPost: Function;
   fetchPost: Function;
 }
 
 const ResultItem = (props: Props) => {
-  const { title, owner, answer_count, tags, question_id } = props.item
+  const { title, owner, answer_count, tags } = props.item
   const { display_name, user_id } = owner
 
   const handleClickOnAuthor = () => props.fetchAddData(user_id, AddDataTypes.AUTHOR)
   const handleClickOnTag = (tagName: string) => props.fetchAddData(tagName, AddDataTypes.TAG)
-  const handleClickOnTitleOrAnswerCount = () => {
-    props.selectPost(props.item)
-    props.fetchPost(question_id)
-  }
+  const handleClickOnTitleOrAnswerCount = () => props.fetchPost(props.item)
 
   const renderTags = () => tags.map((tag) => <Link to={ROUTES.TAG_RESULTS} className='link' onClick={() => handleClickOnTag(tag)}>{`${tag} `}</Link>)
 
@@ -40,7 +36,6 @@ const ResultItem = (props: Props) => {
 }
 
 export default connect(null, {
-  fetchAddData, 
-  selectPost,
+  fetchAddData,
   fetchPost,
 })(ResultItem)

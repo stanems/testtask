@@ -1,21 +1,23 @@
 import React from 'react'
 
 import './style.css'
-import { Data } from '../../utils/types'
-import ResultItem from '../ResultItem/ResultItem'
+import { Question } from '../../utils/types'
+import ResultItem from '../ResultItem'
+import SortSwitch from '../SortSwitch'
 
 interface Props {
-	data: Data[]
+  data: Question[]
 }
 
 const ResultsTable = (props: Props) => {
-	const { data } = props
+  const { data } = props
 
-	return (
-		<div className='resultsTable__container'>
-			{data && data.map(item => <ResultItem item={item} />)}
-		</div>
-	)
+  return (
+    <div className='resultsTable__container'>
+      <SortSwitch />
+      {data && data.map(item => <ResultItem item={item} />)}
+    </div>
+  )
 }
 
 export default ResultsTable

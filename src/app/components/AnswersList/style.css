@@ -1,0 +1,7 @@
+.answersList__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 8px;
+  border: 1px solid #475a53;
+}

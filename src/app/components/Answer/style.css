@@ -1,0 +1,29 @@
+.answer__container {
+  display: flex;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #475a53;
+}
+
+.answer__profile {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  max-width: 10%;
+}
+
+.answer__avatar {
+  max-width: 104px;
+  max-height: 104px;
+}
+
+.answer__name {
+  font-weight: bold;
+  align-self: center;
+}
+
+.answer__bodyContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}

@@ -2,8 +2,7 @@ import * as actionTypes from './actionTypes'
 import { Dispatch } from 'redux'
 import history from '../utils/history'
 import { ROUTES } from '../utils/routes'
-import { AddDataTypes, Data } from '../utils/types'
-import { getQuestionId } from '../utils/selectors'
+import { AddDataTypes, Question } from '../utils/types'
 
 const BASE_API_URL = 'https://api.stackexchange.com/2.2'
 const BASE_SORT_AND_ORDER_PARAMS = 'order=desc&sort=votes&site=stackoverflow'
@@ -44,11 +43,10 @@ export const fetchAddData = (data: number | string, type: string) => (dispatch: 
 
 }
 
-export const selectPost = (data: Data) => (dispatch: Dispatch) => dispatch({ type: actionTypes.SELECT_POST, payload: data })
+export const fetchPost = (data: Question) => (dispatch: Dispatch) => {
+  const questionId = data.question_id
 
-export const fetchPost = () => (dispatch: Dispatch, getState: Function) => {
-  const state = getState()
-  const questionId = getQuestionId(state)
+  dispatch({ type: actionTypes.SELECT_POST, payload: data })
 
   dispatch({ type: actionTypes.FETCH_POST_START })
 
@@ -60,10 +58,7 @@ export const fetchPost = () => (dispatch: Dispatch, getState: Function) => {
     method: 'GET',
   })
     .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      dispatch({ type: actionTypes.FETCH_POST_SUCCESS, payload: data.items })
-    })
+    .then(data => dispatch({ type: actionTypes.FETCH_POST_SUCCESS, payload: data.items }))
     .then(() => history.push(ROUTES.POST))
     .catch(error => dispatch({ type: actionTypes.FETCH_POST_FAIL, error }))
 }
