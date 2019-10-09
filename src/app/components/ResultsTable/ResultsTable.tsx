@@ -1,24 +1,25 @@
-import React from 'react'
+import React from 'react';
+import _ from 'lodash';
+import ResultItem from '../ResultItem';
+import SortSwitch from '../SortSwitch';
+import { Question } from '../../utils/types';
 
-import './style.css'
-import { Question } from '../../utils/types'
-import ResultItem from '../ResultItem'
-import SortSwitch from '../SortSwitch'
+import './style.css';
 
 interface Props {
   data: Question[];
-  type: string
+  type: string;
 }
 
-const ResultsTable = (props: Props) => {
-  const { data, type } = props
+const ResultsTable: React.FC<Props> = (props) => {
+  const { data, type } = props;
 
   return (
-    <div className='resultsTable__container'>
+    <div className="resultsTable__container">
       <SortSwitch fromTable={type} />
-      {data && data.map(item => <ResultItem item={item} />)}
+      {data && _.map(data, (item: Question) => <ResultItem item={item} />)}
     </div>
-  )
-}
+  );
+};
 
-export default ResultsTable
+export default ResultsTable;

@@ -1,3 +1,3 @@
-import Component from './Question'
+import Component from './Question';
 
-export default Component
+export default Component;

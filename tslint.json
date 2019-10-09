@@ -1,7 +1,22 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-config-airbnb", "tslint-react"],
   "jsRules": {},
-  "rules": {},
-  "rulesDirectory": ["tslint-plugin-prettier"]
+  "rules": {
+    "semicolon": [true, "always"],
+    "import-name": [false, "always"],
+    "interface-name": [false, "always"],
+    "variable-name": false,
+    "ordered-imports": false,
+    "jsx-no-lambda": false,
+    "jsx-wrap-multiline": false,
+    "no-shadowed-variable": false,
+    "align": false,
+    "object-literal-sort-keys": false,
+    "object-shorthand-properties-first": false
+  },
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "exclude": [
+    "src/serviceWorker.ts"
+  ]
 }

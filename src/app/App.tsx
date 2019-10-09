@@ -1,37 +1,36 @@
-import React from 'react'
-import { Router, Switch, Route, Redirect } from 'react-router-dom'
+import React from 'react';
 import { connect } from 'react-redux';
-import { AppStore } from './utils/types';
-import SearchPage from './containers/SearchPage';
-import ResultsPage from './containers/ResultsPage';
-import PostPage from './containers/PostPage';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import Loader from './components/Loader';
+import PostPage from './containers/PostPage';
+import ResultsPage from './containers/ResultsPage';
+import SearchPage from './containers/SearchPage';
+import history from './utils/history';
 import { ROUTES } from './utils/routes';
-import history from './utils/history'
+import { AppStore } from './utils/types';
 
-import './App.css'
+import './App.css';
 
 interface Props {
-  loading: boolean
+  loading: boolean;
 }
 
 const App = (props: Props) => (
-  <main className='App'>
+  <main className="App">
     {props.loading && <Loader />}
     <Router history={history}>
       <Switch>
-        <Route exact path={ROUTES.HOME} >
+        <Route exact={true} path={ROUTES.HOME} >
           <Redirect to={ROUTES.SEARCH} />
         </Route> />
         <Route path={ROUTES.SEARCH} component={SearchPage} />
         <Route path={ROUTES.RESULTS} component={ResultsPage} />
-        <Route exact path={ROUTES.POST} component={PostPage} />
+        <Route exact={true} path={ROUTES.POST} component={PostPage} />
       </Switch>
     </Router>
   </main>
-)
+);
 
 export default connect((state: AppStore) => ({
-  loading: state.loading
-}))(App)
-
+  loading: state.loading,
+}))(App);

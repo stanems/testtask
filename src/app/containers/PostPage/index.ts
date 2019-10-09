@@ -1,3 +1,3 @@
-import Component from './PostPage'
+import Component from './PostPage';
 
-export default Component
+export default Component;

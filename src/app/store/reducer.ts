@@ -1,5 +1,5 @@
-import * as actionTypes from './actionTypes'
-import { AppStore, AnyAction, TableTypes, SortVariation, OrderVariation } from '../utils/types'
+import { AnyAction, AppStore, OrderVariation, SortVariation, TableTypes } from '../utils/types';
+import * as actionTypes from './actionTypes';
 
 export const initialState: AppStore = {
   requestParams: {
@@ -10,7 +10,7 @@ export const initialState: AppStore = {
   },
   mainResult: {
     data: [],
-    type: TableTypes.MAIN
+    type: TableTypes.MAIN,
   },
   addResult: {
     data: [],
@@ -20,8 +20,8 @@ export const initialState: AppStore = {
   selectedPost: {
     question: null,
     answers: [],
-  }
-}
+  },
+};
 
 const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
@@ -30,17 +30,17 @@ const reducer = (state = initialState, action: AnyAction) => {
         ...state,
         requestParams: {
           ...state.requestParams,
-          initialRequest: action.payload
-        }
-      }
+          initialRequest: action.payload,
+        },
+      };
 
     case actionTypes.FETCH_DATA_START:
     case actionTypes.FETCH_ADD_DATA_START:
     case actionTypes.FETCH_POST_START:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
 
     case actionTypes.FETCH_DATA_SUCCESS:
       return {
@@ -49,17 +49,17 @@ const reducer = (state = initialState, action: AnyAction) => {
           ...state.mainResult,
           data: action.payload,
         },
-        loading: false
-      }
+        loading: false,
+      };
 
     case actionTypes.SET_SEARCH_PARAM: {
       return {
         ...state,
         requestParams: {
           ...state.requestParams,
-          addTableParam: action.payload
-        }
-      }
+          addTableParam: action.payload,
+        },
+      };
     }
 
     case actionTypes.SET_SORT_BY_PARAM: {
@@ -67,9 +67,9 @@ const reducer = (state = initialState, action: AnyAction) => {
         ...state,
         requestParams: {
           ...state.requestParams,
-          sortBy: action.payload
-        }
-      }
+          sortBy: action.payload,
+        },
+      };
     }
 
     case actionTypes.SET_ORDER_BY_PARAM: {
@@ -77,9 +77,9 @@ const reducer = (state = initialState, action: AnyAction) => {
         ...state,
         requestParams: {
           ...state.requestParams,
-          orderBy: action.payload
-        }
-      }
+          orderBy: action.payload,
+        },
+      };
     }
 
     case actionTypes.FETCH_ADD_DATA_SUCCESS:
@@ -89,8 +89,8 @@ const reducer = (state = initialState, action: AnyAction) => {
           ...state.addResult,
           data: action.payload,
         },
-        loading: false
-      }
+        loading: false,
+      };
 
     case actionTypes.FETCH_POST_SUCCESS:
       return {
@@ -98,30 +98,30 @@ const reducer = (state = initialState, action: AnyAction) => {
         loading: false,
         selectedPost: {
           ...state.selectedPost,
-          answers: action.payload
-        }
-      }
+          answers: action.payload,
+        },
+      };
 
     case actionTypes.FETCH_DATA_FAIL:
     case actionTypes.FETCH_ADD_DATA_FAIL:
     case actionTypes.FETCH_POST_FAIL:
       return {
         ...state,
-        loading: false
-      }
+        loading: false,
+      };
 
     case actionTypes.SELECT_POST:
       return {
         ...state,
         selectedPost: {
           ...state.selectedPost,
-          question: action.payload
-        }
-      }
+          question: action.payload,
+        },
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;

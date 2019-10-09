@@ -1,3 +1,3 @@
-import Component from './AnswersList'
+import Component from './AnswersList';
 
-export default Component
+export default Component;

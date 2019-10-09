@@ -1,3 +1,3 @@
-import Component from './ResultsTable'
+import Component from './ResultsTable';
 
-export default Component
+export default Component;

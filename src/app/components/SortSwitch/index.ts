@@ -1,3 +1,3 @@
-import Component from './SortSwitch'
+import Component from './SortSwitch';
 
-export default Component
+export default Component;

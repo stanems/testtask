@@ -36,8 +36,8 @@ export interface Answer {
 }
 
 export interface Post {
-  question: Question | null,
-  answers: Answer[] | [],
+  question: Question | null;
+  answers: Answer[] | [];
 }
 
 export interface AddRequestParam {
@@ -53,17 +53,17 @@ export interface RequestParams {
 }
 
 export interface AppStore {
-  requestParams: RequestParams,
+  requestParams: RequestParams;
   mainResult: {
     data: Question[] | [];
     type: string;
-  },
+  };
   addResult: {
     data: Question[] | [];
     type: string;
-  },
+  };
   loading: boolean;
-  selectedPost: Post
+  selectedPost: Post;
 }
 
 export interface Action {
@@ -76,30 +76,30 @@ export interface AnyAction extends Action {
 }
 
 export interface SearchParams {
-  sortBy: string,
-  orderBy: string,
-  fromTable: string,
-  initialRequest: string,
-  searchParam: AddRequestParam
+  sortBy: string;
+  orderBy: string;
+  fromTable: string;
+  initialRequest: string;
+  searchParam: AddRequestParam;
 }
 
 export const AddDataTypes = {
   AUTHOR: 'author',
-  TAG: 'tag'
-}
+  TAG: 'tag',
+};
 
 export const SortVariation = {
   ACTIVITY: 'activity',
   CREATION: 'creation',
-  VOTES: 'votes'
-}
+  VOTES: 'votes',
+};
 
 export const OrderVariation = {
   DESC: 'desc',
-  ASC: 'asc'
-}
+  ASC: 'asc',
+};
 
 export const TableTypes = {
   MAIN: 'main',
   ADD: 'add',
-}
+};

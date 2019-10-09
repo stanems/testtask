@@ -1,65 +1,60 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { SortVariation, OrderVariation, AppStore, RequestParams, TableTypes } from '../../utils/types'
-import { setSortBy, setOrderBy, fetchData, fetchAddData } from '../../store/actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import { SortVariation, OrderVariation, AppStore, RequestParams, TableTypes } from '../../utils/types';
+import { setSortBy, setOrderBy, fetchData, fetchAddData } from '../../store/actions';
 
-import './style.css'
+import './style.css';
 
 interface Props {
   fromTable: string;
   requestParams: RequestParams;
-  setSortBy: Function;
-  setOrderBy: Function;
-  fetchData: Function;
-  fetchAddData: Function;
+  setSortBy: (value: string) => void;
+  setOrderBy: (value: string) => void;
+  fetchData: (request: string) => void;
+  fetchAddData: (value: number | string, type: string) => void;
 }
 
-const SortSwitch = (props: Props) => {
-  const { requestParams, setSortBy, setOrderBy, fetchData, fetchAddData, fromTable } = props
-  const { sortBy, orderBy, initialRequest, addTableParam } = requestParams
+const SortSwitch: React.FC<Props> = (props) => {
+  const { requestParams, setSortBy, setOrderBy, fetchData, fetchAddData, fromTable } = props;
+  const { sortBy, orderBy, initialRequest, addTableParam } = requestParams;
 
   const handleSortBy = (e: any) => {
-    setSortBy(e.target.value)
+    setSortBy(e.target.value);
     if (fromTable === TableTypes.MAIN) {
-      fetchData(initialRequest)
+      fetchData(initialRequest);
     }
-    addTableParam && fetchAddData(addTableParam.value, addTableParam.type)
-  }
+    if (addTableParam) fetchAddData(addTableParam.value, addTableParam.type);
+  };
 
   const handleOrderBy = (e: any) => {
-    setOrderBy(e.target.value)
+    setOrderBy(e.target.value);
     if (fromTable === TableTypes.MAIN) {
-      fetchData(initialRequest)
+      fetchData(initialRequest);
     }
-    addTableParam && fetchAddData(addTableParam.value, addTableParam.type)
-  }
+    if (addTableParam) fetchAddData(addTableParam.value, addTableParam.type);
+  };
 
   return (
-    <form className='switcher__container'>
-      <div className='switcher__variantContainer'>
-        <p className='switcher__title'>Sort by: </p>
-        <select className='switcher__select' value={sortBy} onChange={handleSortBy}>
+    <form className="switcher__container">
+      <div className="switcher__variantContainer">
+        <p className="switcher__title">Sort by: </p>
+        <select className="switcher__select" value={sortBy} onChange={handleSortBy}>
           <option value={SortVariation.ACTIVITY}>{SortVariation.ACTIVITY}</option>
           <option value={SortVariation.CREATION}>{SortVariation.CREATION}</option>
           <option value={SortVariation.VOTES}>{SortVariation.VOTES}</option>
         </select>
       </div>
-      <div className='switcher__variantContainer'>
-        <p className='switcher__title'>Order by: </p>
-        <select className='switcher__select' value={orderBy} onChange={handleOrderBy}>
+      <div className="switcher__variantContainer">
+        <p className="switcher__title">Order by: </p>
+        <select className="switcher__select" value={orderBy} onChange={handleOrderBy}>
           <option value={OrderVariation.DESC}>{OrderVariation.DESC}</option>
           <option value={OrderVariation.ASC}>{OrderVariation.ASC}</option>
         </select>
       </div>
     </form>
-  )
-}
+  );
+};
 
 export default connect((state: AppStore) => ({
-  requestParams: state.requestParams
-}), {
-  setSortBy,
-  setOrderBy,
-  fetchData,
-  fetchAddData
-})(SortSwitch)
+  requestParams: state.requestParams,
+}), { setSortBy, setOrderBy, fetchData, fetchAddData })(SortSwitch);

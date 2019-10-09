@@ -1,3 +1,3 @@
-import Component from './SearchPage'
+import Component from './SearchPage';
 
-export default Component
+export default Component;
