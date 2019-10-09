@@ -22,7 +22,7 @@ const ResultItem: React.FC<Props & RouteComponentProps> = (props) => {
   const handleClickOnTag = (tagName: string) => props.fetchAddData(tagName, AddDataTypes.TAG);
 
   const renderTags = () => _.map(tags, (tag: string) => (
-    <span className="link" onClick={() => handleClickOnTag(tag)}>{`${tag} `}</span>
+    <span key={tag} className="link" onClick={() => handleClickOnTag(tag)}>{`${tag} `}</span>
   ));
 
   return (

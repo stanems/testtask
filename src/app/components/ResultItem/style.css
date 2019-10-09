@@ -7,10 +7,6 @@
   z-index: -1;
 }
 
-.resultItem__container:hover {
-  background-color: #475a53;
-}
-
 .resultItem__title {
   font-weight: bold;
 }
@@ -30,12 +26,16 @@
   text-decoration: none;
 }
 
+p {
+  margin: 6px 0;
+}
+
+.resultItem__container:hover {
+  background-color: #475a53;
+}
+
 .link:hover {
   cursor: pointer;
   font-weight: bold;
   color: #2aa87a
-}
-
-p {
-  margin: 6px 0;
 }
