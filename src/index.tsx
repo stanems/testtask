@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'core-js/es/map';
+import 'core-js/es/set';
+import 'babel-polyfill';
+import "@babel/core";
+import "@babel/generator";
+import 'react-app-polyfill/stable';
 import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
