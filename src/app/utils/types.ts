@@ -9,6 +9,7 @@ export interface Owner {
 
 export interface Question {
   answer_count: number;
+  answers: Answer[];
   body: string;
   creation_date: number;
   is_answered: boolean;
@@ -35,11 +36,6 @@ export interface Answer {
   score: number;
 }
 
-export interface Post {
-  question: Question | null;
-  answers: Answer[] | [];
-}
-
 export interface AddRequestParam {
   type: string;
   value: string | number;
@@ -63,7 +59,7 @@ export interface AppStore {
     type: string;
   };
   loading: boolean;
-  selectedPost: Post;
+  selectedPost: any;
 }
 
 export interface Action {

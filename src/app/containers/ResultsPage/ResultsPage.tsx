@@ -1,36 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { AppStore, Question, TableTypes } from '../../utils/types';
 import ResultsTable from '../../components/ResultsTable';
-import { Switch, Route } from 'react-router';
-import { ROUTES } from '../../utils/routes';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { fetchData } from '../../store/actions';
 
 import './style.css';
 
-interface Props {
+type RouteParams = {
+  value: string;
+};
+
+type Props = RouteComponentProps<RouteParams> & {
   data: Question[] | null;
   addData: Question[] | null;
-}
+  fetchData: (value: string) => void;
+};
 
 const ResultsPage: React.FC<Props> = (props) => {
-  const { data, addData } = props;
+  const { data, addData, fetchData } = props;
+  const { value } = props.match.params;
 
-  const AddResultTable = () => addData && <ResultsTable data={addData} type={TableTypes.ADD} />;
+  useEffect(() => fetchData(value), [fetchData, value]);
 
   return (
     <div className="results__container">
       {data && <ResultsTable data={data} type={TableTypes.MAIN} />}
       <div className="results__preview">
-        <Switch>
-          <Route path={ROUTES.AUTHOR_RESULTS} component={AddResultTable} />
-          <Route path={ROUTES.TAG_RESULTS} component={AddResultTable} />
-        </Switch>
+        {!!_.size(addData) && <ResultsTable data={addData} type={TableTypes.ADD} />}
       </div>
     </div>
   );
 };
 
-export default connect((state: AppStore) => ({
+export default withRouter(connect((state: AppStore) => ({
   data: state.mainResult.data,
   addData: state.addResult.data,
-}))(ResultsPage);
+}), {
+  fetchData,
+})(ResultsPage));

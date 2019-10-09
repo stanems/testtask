@@ -17,10 +17,7 @@ export const initialState: AppStore = {
     type: TableTypes.ADD,
   },
   loading: false,
-  selectedPost: {
-    question: null,
-    answers: [],
-  },
+  selectedPost: null,
 };
 
 const reducer = (state = initialState, action: AnyAction) => {
@@ -96,10 +93,7 @@ const reducer = (state = initialState, action: AnyAction) => {
       return {
         ...state,
         loading: false,
-        selectedPost: {
-          ...state.selectedPost,
-          answers: action.payload,
-        },
+        selectedPost: action.payload[0],
       };
 
     case actionTypes.FETCH_DATA_FAIL:

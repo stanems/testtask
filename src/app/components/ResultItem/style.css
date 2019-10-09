@@ -20,12 +20,18 @@
 	justify-content: space-between
 }
 
+.resultItem__author {
+  display: flex;
+  
+}
+
 .link {
   color: white;
   text-decoration: none;
 }
 
 .link:hover {
+  cursor: pointer;
   font-weight: bold;
   color: #2aa87a
 }

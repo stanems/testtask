@@ -13,7 +13,8 @@
     "no-shadowed-variable": false,
     "align": false,
     "object-literal-sort-keys": false,
-    "object-shorthand-properties-first": false
+    "object-shorthand-properties-first": false,
+    "interface-over-type-literal": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"],
   "exclude": [

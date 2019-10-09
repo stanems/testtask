@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { AppStore, Post } from '../../utils/types';
+import { AppStore, Question as QuestionType } from '../../utils/types';
+import { RouteComponentProps, withRouter } from 'react-router';
 import Question from '../../components/Question';
 import AnswersList from '../../components/AnswersList';
+import { fetchPost } from '../../store/actions';
 
 import './style.css';
 
-interface Props {
-  post: Post;
-}
+type RouteParams = {
+  id: string;
+};
+
+type Props = RouteComponentProps<RouteParams> & {
+  post: QuestionType;
+  fetchPost: (id: string) => void;
+};
 
 const PostPage: React.FC<Props> = (props) => {
-  const { question, answers } = props.post;
+  const { fetchPost, post } = props;
+  const { id } = props.match.params;
+
+  useEffect(() => fetchPost(id), [fetchPost, id]);
 
   return (
     <div className="post__container">
-      {question && <Question question={question} />}
-      {answers && <AnswersList answers={answers} />}
+      {post && <Question question={post} />}
+      {post && post.answers && <AnswersList answers={post.answers} />}
     </div>
   );
 };
 
-export default connect((state: AppStore) => ({
+export default withRouter(connect((state: AppStore) => ({
   post: state.selectedPost,
-}))(PostPage);
+}), {
+  fetchPost,
+})(PostPage));

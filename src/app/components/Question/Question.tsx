@@ -1,8 +1,8 @@
 import React from 'react';
 import reactHtmlParser from 'react-html-parser';
+import { Question as QuestionType } from '../../utils/types';
 
 import './style.css';
-import { Question as QuestionType } from '../../utils/types';
 
 interface Props {
   question: QuestionType;

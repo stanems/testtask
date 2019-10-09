@@ -1,8 +1,10 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-width: 1024px;
   max-width: 1180px;
+  animation: fadeIn ease 1s;
 }
 
 .header {
@@ -11,16 +13,24 @@
   margin: 20px 0;
 }
 
-.textarea {
+.input {
 	font-size: 20px;
   height: 24px;
+  width: 800px;
   max-width: 1024px;
-  max-height: 90%;
 }
 
 .button {
   align-self: center;
 	margin-top: 20px;
   font-size: 24px;
-  width: 50%;
+}
+
+@keyframes fadeIn{
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
 }

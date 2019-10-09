@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux';
-import history from '../utils/history';
-import { ROUTES } from '../utils/routes';
-import { AddDataTypes, AppStore, Question, RequestParams } from '../utils/types';
+import { AddDataTypes, AppStore, RequestParams } from '../utils/types';
 import * as actionTypes from './actionTypes';
 
 const BASE_API_URL = 'https://api.stackexchange.com/2.2';
@@ -9,29 +7,29 @@ const hasBody = 'filter=!9Z(-wwYGT'; // thats the filter name in Stackoverflow
 
 const queriesContructor = (params: RequestParams, withBody: boolean): string => `order=${params.orderBy}&sort=${params.sortBy}&site=stackoverflow&${withBody && hasBody}`;
 
-export const fetchData = (request: string) => (dispatch: Dispatch, getState: () => AppStore) => {
-  const state: AppStore = getState();
-  const params: RequestParams = state.requestParams;
+export const fetchData = (request: string) =>
+  (dispatch: Dispatch, getState: () => AppStore) => {
+    const state: AppStore = getState();
+    const params: RequestParams = state.requestParams;
 
-  const { initialRequest } = params;
+    const { initialRequest } = params;
 
-  if (initialRequest !== request) {
-    dispatch({ type: actionTypes.SET_INITIAL_REQUEST, payload: request });
-  }
+    if (initialRequest !== request) {
+      dispatch({ type: actionTypes.SET_INITIAL_REQUEST, payload: request });
+    }
 
-  dispatch({ type: actionTypes.FETCH_DATA_START });
+    dispatch({ type: actionTypes.FETCH_DATA_START });
 
-  const queries = queriesContructor(params, true);
-  const URL = `${BASE_API_URL}/search?intitle=${request}&${queries}`;
+    const queries = queriesContructor(params, true);
+    const URL = `${BASE_API_URL}/search?intitle=${request}&${queries}`;
 
-  fetch(URL, {
-    method: 'GET',
-  })
-    .then(response => response.json())
-    .then(data => dispatch({ type: actionTypes.FETCH_DATA_SUCCESS, payload: data.items }))
-    .then(() => history.push(ROUTES.RESULTS))
-    .catch(err => dispatch({ type: actionTypes.FETCH_DATA_FAIL, error: err }));
-};
+    fetch(URL, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => dispatch({ type: actionTypes.FETCH_DATA_SUCCESS, payload: data.items }))
+      .catch(err => dispatch({ type: actionTypes.FETCH_DATA_FAIL, error: err }));
+  };
 
 export const fetchAddData = (data: number | string, type: string) =>
   (dispatch: Dispatch, getState: () => AppStore) => {
@@ -54,33 +52,25 @@ export const fetchAddData = (data: number | string, type: string) =>
     })
       .then(response => response.json())
       .then(data => dispatch({ type: actionTypes.FETCH_ADD_DATA_SUCCESS, payload: data.items }))
-      .then(() => type === AddDataTypes.AUTHOR ?
-        history.push(ROUTES.AUTHOR_RESULTS) :
-        history.push(ROUTES.TAG_RESULTS))
       .catch(err => dispatch({ type: actionTypes.FETCH_ADD_DATA_FAIL, error: err }));
 
   };
 
-export const fetchPost = (data: Question) => (dispatch: Dispatch, getState: () => AppStore) => {
+export const fetchPost = (id: string) => (dispatch: Dispatch, getState: () => AppStore) => {
   const state: AppStore = getState();
   const params: RequestParams = state.requestParams;
-  const questionId = data.question_id;
 
-  dispatch({ type: actionTypes.SELECT_POST, payload: data });
+  dispatch({ type: actionTypes.FETCH_POST_START, payload: id });
 
-  dispatch({ type: actionTypes.FETCH_POST_START });
-
-  // thats the filter name in Stackoverflow
-  const hasAnswerBody = 'filter=!9Z(-wzu0T';
+  const hasAnswerBody = 'filter=!-*jbN-lAlw-5';
   const queries = queriesContructor(params, false);
-  const URL = `${BASE_API_URL}/questions/${questionId}/answers?${queries}&${hasAnswerBody}`;
+  const URL = `${BASE_API_URL}/questions/${id}?${queries}&${hasAnswerBody}`;
 
   fetch(URL, {
     method: 'GET',
   })
     .then(response => response.json())
     .then(data => dispatch({ type: actionTypes.FETCH_POST_SUCCESS, payload: data.items }))
-    .then(() => history.push(ROUTES.POST))
     .catch(err => dispatch({ type: actionTypes.FETCH_POST_FAIL, error: err }));
 };
 

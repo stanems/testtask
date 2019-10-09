@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'react-app-polyfill/ie9';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux'
-import { store, persistor } from './app/store/configureStore';
+import { Provider } from 'react-redux';
+import store from './app/store/configureStore';
 import App from './app/App';
-import { PersistGate } from 'redux-persist/integration/react'
 
 const APP = (
-  <PersistGate loading={null} persistor={persistor}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </PersistGate>
-)
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
 
 ReactDOM.render(APP, document.getElementById('root'));
 

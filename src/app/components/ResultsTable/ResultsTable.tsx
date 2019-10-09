@@ -7,7 +7,7 @@ import { Question } from '../../utils/types';
 import './style.css';
 
 interface Props {
-  data: Question[];
+  data: Question[] | null;
   type: string;
 }
 
@@ -17,7 +17,7 @@ const ResultsTable: React.FC<Props> = (props) => {
   return (
     <div className="resultsTable__container">
       <SortSwitch fromTable={type} />
-      {data && _.map(data, (item: Question) => <ResultItem item={item} />)}
+      {data && _.map(data, (item: Question) => <ResultItem item={item} key={item.question_id} />)}
     </div>
   );
 };
