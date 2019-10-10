@@ -1,0 +1,14 @@
+.ie .App {
+    display: block;
+    padding-top: 200px;
+    text-align: center;
+}
+
+.ie .container {
+    margin: auto;
+}
+
+.ie .input {
+    display: block;
+    margin: auto;
+}

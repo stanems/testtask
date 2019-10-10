@@ -52,9 +52,8 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
       "not op_mini all",
-      "IE 9"
+      "ie 9"
     ],
     "development": [
       "last 1 chrome version",

@@ -9,6 +9,11 @@ import ResultsPage from './containers/ResultsPage';
 import PostPage from './containers/PostPage';
 
 import './App.css';
+import './ie.css';
+
+if (window.navigator.appName === "Microsoft Internet Explorer" ) {
+  document.body.className = 'ie'
+}
 
 interface Props {
   loading: boolean;
