@@ -11,8 +11,8 @@ import PostPage from './containers/PostPage';
 import './App.css';
 import './ie.css';
 
-if (window.navigator.appName === "Microsoft Internet Explorer" ) {
-  document.body.className = 'ie'
+if (window.navigator.appName === 'Microsoft Internet Explorer') {
+  document.body.className = 'ie';
 }
 
 interface Props {

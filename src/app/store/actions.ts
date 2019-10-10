@@ -27,15 +27,15 @@ export const fetchData = (request: string) =>
       method: 'GET',
     })
       .then(response => response.json())
-      .then(data => {
-        dispatch({ type: actionTypes.FETCH_DATA_SUCCESS, payload: data.items })
+      .then((data) => {
+        dispatch({ type: actionTypes.FETCH_DATA_SUCCESS, payload: data.items });
         if (data.items.length === 0) {
-          window.alert(`${request} not found`)
+          window.alert(`${request} not found`);
         }
       })
-      .catch(err => {
-        dispatch({ type: actionTypes.FETCH_DATA_FAIL, error: err })
-        window.alert(err.message)
+      .catch((err) => {
+        dispatch({ type: actionTypes.FETCH_DATA_FAIL, error: err });
+        window.alert(err.message);
       });
   };
 
@@ -60,7 +60,7 @@ export const fetchAddData = (data: number | string, type: string) =>
     })
       .then(response => response.json())
       .then(data => dispatch({ type: actionTypes.FETCH_ADD_DATA_SUCCESS, payload: data.items }))
-      .catch(err =>{ 
+      .catch((err) => {
         dispatch({ type: actionTypes.FETCH_ADD_DATA_FAIL, error: err });
         window.alert(err.message);
       });
@@ -82,9 +82,9 @@ export const fetchPost = (id: string) => (dispatch: Dispatch, getState: () => Ap
   })
     .then(response => response.json())
     .then(data => dispatch({ type: actionTypes.FETCH_POST_SUCCESS, payload: data.items }))
-    .catch(err => {
-      dispatch({ type: actionTypes.FETCH_POST_FAIL, error: err })
-      window.alert(err.message)
+    .catch((err) => {
+      dispatch({ type: actionTypes.FETCH_POST_FAIL, error: err });
+      window.alert(err.message);
     });
 };
 
